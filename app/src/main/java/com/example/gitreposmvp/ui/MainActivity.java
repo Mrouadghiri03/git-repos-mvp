@@ -4,8 +4,10 @@ package com.example.gitreposmvp.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 }
 */
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+/*public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -220,5 +222,96 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showError(String message) {
 
         isLoading = false;
+    }
+}
+
+ */
+public class MainActivity extends AppCompatActivity implements MainContract.View {
+
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private Button btnPrevious, btnNext;
+    private TextView tvPage;
+
+    private RepositoryAdapter adapter;
+    private MainPresenter presenter;
+
+    private int currentPage = 1;
+    private static final int PAGE_SIZE = 30;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        progressBar = findViewById(R.id.progressBar);
+        btnPrevious = findViewById(R.id.btnPrevious);
+        btnNext = findViewById(R.id.btnNext);
+        tvPage = findViewById(R.id.tvPage);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new RepositoryAdapter();
+        recyclerView.setAdapter(adapter);
+
+        ApiService apiService =
+                ApiClient.getRetrofit().create(ApiService.class);
+
+        GithubRepository repository =
+                new GithubRepository(apiService);
+
+        presenter = new MainPresenter(this, repository);
+
+        loadPage(currentPage);
+
+        btnNext.setOnClickListener(v -> {
+            currentPage++;
+            loadPage(currentPage);
+        });
+
+        btnPrevious.setOnClickListener(v -> {
+            if (currentPage > 1) {
+                currentPage--;
+                loadPage(currentPage);
+            }
+        });
+    }
+
+    private void loadPage(int page) {
+        presenter.loadRepositories(page);
+        tvPage.setText("Page " + page);
+
+        btnPrevious.setEnabled(page > 1);
+    }
+
+    // ---------------- MVP ----------------
+
+    @Override
+    public void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRepositories(List<Repository> repositories) {
+
+        adapter.setData(repositories);
+
+        // Si moins de 30 → plus de page suivante
+        if (repositories.size() < PAGE_SIZE) {
+            btnNext.setEnabled(false);
+        } else {
+            btnNext.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+        btnNext.setEnabled(false);
     }
 }

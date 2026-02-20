@@ -21,11 +21,13 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     private List<Repository> list = new ArrayList<>();
 
-    public void setData(List<Repository> data) {
+  /*  public void setData(List<Repository> data) {
 
         list = data;
         notifyDataSetChanged();
     }
+
+   */
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -84,5 +86,10 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         list.addAll(data);
 
         notifyItemRangeInserted(start, data.size());
+    }
+    public void setData(List<Repository> data) {
+        list.clear();
+        list.addAll(data);
+        notifyDataSetChanged();
     }
 }
