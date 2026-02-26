@@ -1,7 +1,5 @@
 package com.example.gitreposmvp.ui.adapter;
 
-
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,21 +19,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     private List<Repository> list = new ArrayList<>();
 
-  /*  public void setData(List<Repository> data) {
-
-        list = data;
-        notifyDataSetChanged();
-    }
-
-   */
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name, author, stars;
         ImageView avatar;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
@@ -47,13 +36,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view =
-                LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_repository,
-                                parent,
-                                false);
-
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_repository, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,33 +47,23 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         Repository repo = list.get(position);
 
         holder.name.setText(repo.getName());
-
         holder.author.setText(repo.getOwner().getLogin());
-
-        holder.stars.setText(
-                "Stars: " + repo.getStars());
+        holder.stars.setText("⭐ " + repo.getStars());
 
         Glide.with(holder.avatar.getContext())
                 .load(repo.getOwner().getAvatarUrl())
+                .circleCrop()
                 .into(holder.avatar);
     }
 
     @Override
     public int getItemCount() {
-
         return list.size();
     }
+
     public void addData(List<Repository> data) {
-
         int start = list.size();
-
         list.addAll(data);
-
         notifyItemRangeInserted(start, data.size());
-    }
-    public void setData(List<Repository> data) {
-        list.clear();
-        list.addAll(data);
-        notifyDataSetChanged();
     }
 }
