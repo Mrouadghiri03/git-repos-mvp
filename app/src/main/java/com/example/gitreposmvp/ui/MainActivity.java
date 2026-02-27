@@ -29,6 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
+    //implementation de maincontract.view elle execute les ordres graphique mais ne reflechit jamais
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private RepositoryAdapter adapter;

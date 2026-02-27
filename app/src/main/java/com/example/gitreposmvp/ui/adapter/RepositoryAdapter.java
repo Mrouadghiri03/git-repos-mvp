@@ -17,6 +17,10 @@ import java.util.List;
 
 public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    //ui package de view ;affiche les données et capte les actions utilisateur
+    //juste elle ecoute le presenter et mise a jour ses element ne prends aucun decision
+
+    //repositry adapter : le pont entre les données et le recycleView gestion
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_LOADING = 1;
 

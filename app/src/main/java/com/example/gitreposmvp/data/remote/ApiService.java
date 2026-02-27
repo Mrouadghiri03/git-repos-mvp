@@ -9,6 +9,8 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+
+    //les points d'entré de la construction de l'url
     @GET("search/repositories")
     Call<ApiResponse> getRepositories(
 

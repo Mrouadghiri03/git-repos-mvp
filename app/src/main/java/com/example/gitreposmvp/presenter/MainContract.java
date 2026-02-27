@@ -7,9 +7,9 @@ import com.example.gitreposmvp.data.model.Repository;
 import java.util.List;
 
 public interface MainContract {
-
+    //package presenter , intermidaire entre la vue et le model , il gere la logique
     interface View {
-
+        // ce que UI peut faire (chargement , erreur ................)
         void showLoading();
 
         void hideLoading();
@@ -20,7 +20,7 @@ public interface MainContract {
     }
 
     interface Presenter {
-
+        //les actions que user peut faire
         void loadRepositories(int page);
     }
 }

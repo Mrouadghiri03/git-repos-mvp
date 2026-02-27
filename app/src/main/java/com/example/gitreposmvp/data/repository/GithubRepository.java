@@ -17,6 +17,7 @@ import java.util.Locale;
 
 public class GithubRepository {
 
+    //logique metier (calcul de date ) aussi injection de depandance ;on injecte apiservice dans repository
     private ApiService apiService;
 
     @Inject

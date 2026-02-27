@@ -12,8 +12,9 @@ import javax.inject.Singleton;
 @Module
 public class NetworkModule {
 
+    //network module : on fabrique tout ce qui touche a la donné et au reseau
     @Provides
-    @Singleton
+    @Singleton//pour creer un seule instance pour toute lapplication
     Retrofit provideRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")

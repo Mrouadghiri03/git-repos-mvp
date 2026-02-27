@@ -16,7 +16,7 @@ import java.util.List;
 
 @Module
 public class PresenterModule {
-
+    //presenter module : fait le lien entre l'activity et le presenter , il prends la view de l'activity pour la fournir au presenter
     private final MainContract.View view;
 
     public PresenterModule(MainContract.View view) {
@@ -28,7 +28,7 @@ public class PresenterModule {
         return view;
     }
 
-    @Provides
+    @Provides//permet a dagger les etapes de creation
     MainPresenter providePresenter(GithubRepository repository,
                                    MainContract.View view) {
         return new MainPresenter(view, repository);

@@ -6,6 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
+    //remote : on gere la communication avec le serveur en utilisant retrofit
+
+    //apiCleint : configuration de URL 
     private static final String BASE_URL =
             "https://api.github.com/";
 
