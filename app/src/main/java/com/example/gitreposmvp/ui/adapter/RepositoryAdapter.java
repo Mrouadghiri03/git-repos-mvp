@@ -33,12 +33,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             name = itemView.findViewById(R.id.name);
             author = itemView.findViewById(R.id.author);
             stars = itemView.findViewById(R.id.stars);
-            description = itemView.findViewById(R.id.description); // Ajouté selon ta demande
+            description = itemView.findViewById(R.id.description);
             avatar = itemView.findViewById(R.id.avatar);
         }
     }
 
-    // ViewHolder pour le loader du bas
+    // ViewHolder li kayn lT7T
     public static class LoadingViewHolder extends RecyclerView.ViewHolder {
         public LoadingViewHolder(View itemView) {
             super(itemView);
